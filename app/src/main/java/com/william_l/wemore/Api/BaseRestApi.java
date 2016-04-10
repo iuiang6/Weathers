@@ -26,20 +26,20 @@ public abstract class BaseRestApi {
         this._method = method;
     }
 
-    public void call() throws IOException {
+    public void call() throws Exception {
         call(true);
     }
 
-    public void call(Boolean async) throws IOException {
+    public void call(Boolean async) throws Exception {
 
         call(async, 15000);
 
     }
 
-    public void call(Boolean async, int timeout) throws IOException {
+    public void call(Boolean async, int timeout) throws Exception {
 
         if (!async && Thread.currentThread() == Looper.getMainLooper().getThread()) {
-            new Exception("不允许在主线程中使用同步方法调用此接口");
+            throw new Exception("不允许在主线程中使用同步方法调用此接口");
         }
 
         if (this.isSimulate()) {
@@ -85,7 +85,9 @@ public abstract class BaseRestApi {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    in.close();
+                    if (null != in) {
+                        in.close();
+                    }
                 }
 
             }
@@ -98,7 +100,7 @@ public abstract class BaseRestApi {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (null != in){
+                if (null != in) {
                     in.close();
                 }
 
@@ -135,7 +137,7 @@ public abstract class BaseRestApi {
 
     }
 
-    protected InputStream requestStream(){
+    protected InputStream requestStream() {
         return null;
     }
 
