@@ -3,6 +3,7 @@ package com.william_l.wemore.Weather.Presenter;
 import android.content.Context;
 
 import com.william_l.wemore.Api.Constant.Perference;
+import com.william_l.wemore.Api.MyThreadPool;
 import com.william_l.wemore.Api.http.HttpConnection;
 import com.william_l.wemore.Weather.View.IWeatherView;
 
@@ -10,7 +11,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -31,7 +31,7 @@ public class WeahtersPresenterCompl implements IWeathersPresenter {
     public void loadDatas() {
 
 
-        ExecutorService cachedExecutor = Executors.newCachedThreadPool();
+        ExecutorService cachedExecutor = MyThreadPool.getInstance();
 
         for (int i = 0; i < 10; i++) {
 

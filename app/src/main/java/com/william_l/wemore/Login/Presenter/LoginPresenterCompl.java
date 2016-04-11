@@ -3,9 +3,13 @@ package com.william_l.wemore.Login.Presenter;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.william_l.wemore.Api.LoginRestApi;
+import com.william_l.wemore.Api.MyThreadPool;
 import com.william_l.wemore.Login.Model.IUser;
 import com.william_l.wemore.Login.Model.UserModel;
 import com.william_l.wemore.Login.View.ILoginView;
+
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by william on 2016/4/1.
@@ -37,12 +41,26 @@ public class LoginPresenterCompl implements ILoginPresenter {
             isLoginSuccess = false;
         }
         final Boolean result = isLoginSuccess;
-        handler.postDelayed(new Runnable() {
+
+
+        ExecutorService cachedExecutor = MyThreadPool.getInstance();
+        cachedExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                iLoginView.onLoginResult(result, code);
+                LoginRestApi loginRA = new LoginRestApi("","");
+                try {
+                    loginRA.call(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }, 3000);
+        });
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                iLoginView.onLoginResult(result, code);
+//            }
+//        }, 3000);
     }
 
     @Override

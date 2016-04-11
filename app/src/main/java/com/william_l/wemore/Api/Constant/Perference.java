@@ -9,6 +9,6 @@ public class Perference {
 
     public final static String WeatherAppid = "7a50facd16028abac5eaf18581f4cc34";
 
-    public final static String LoginUrl = "http://192.168.0.12:8080/resultJ/test";
+    public final static String LoginUrl = "http://127.0.0.1:8080/resultJ/test";
 
 }
