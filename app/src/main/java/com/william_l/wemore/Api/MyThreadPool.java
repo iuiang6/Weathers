@@ -20,4 +20,11 @@ public class MyThreadPool {
 
     }
 
+    public static void close() {
+        if (null != cachedExecutor && !cachedExecutor.isShutdown()) {
+            cachedExecutor.shutdown();
+            cachedExecutor = null;
+        }
+    }
+
 }

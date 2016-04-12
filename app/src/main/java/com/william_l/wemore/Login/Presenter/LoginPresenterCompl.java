@@ -47,7 +47,7 @@ public class LoginPresenterCompl implements ILoginPresenter {
         cachedExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                LoginRestApi loginRA = new LoginRestApi("","");
+                LoginRestApi loginRA = new LoginRestApi("", "");
                 try {
                     loginRA.call(false);
                 } catch (Exception e) {
