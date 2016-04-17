@@ -19,11 +19,17 @@ public class LoginRestApi extends BaseRestApi {
 
     @Override
     protected boolean parseResponseData(String responseString) {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean isSimulate() {
-        return true;
+
+        return false;
+    }
+
+    @Override
+    protected String simulateResponse() {
+        return "{123123}";
     }
 }

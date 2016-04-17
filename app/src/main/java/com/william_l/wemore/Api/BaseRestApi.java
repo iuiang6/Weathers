@@ -260,26 +260,26 @@ public abstract class BaseRestApi {
                 }
 
             } else {
-                // TODO 判断是否我所约定的规则
-                if (true) {
-                    try {
-                        this.parseJsonResponse(responseString);
-                    } catch (JSONException e) {
-                        if (_listener != null) {
-                            _listener.onError(this, e);
-                        }
-                    }
-                }
+                // TODO 判断是否我所约定的规则,我们没有相对应的规则，故不做判断
+//            if (true) {
+//                try {
+//                    this.parseJsonResponse(responseString);
+//                } catch (JSONException e) {
+//                    if (_listener != null) {
+//                        _listener.onError(this, e);
+//                    }
+//                }
+//            }
 
-                if (this.parseResponseData(responseString)) {
-                    this._isSuccessed = true;
+            if (this.parseResponseData(responseString)) {
+                this._isSuccessed = true;
 
-                    // 服务器请求成功
-                    if (_listener != null) {
-                        _listener.onSuccessed(this);
-                    }
+                // 服务器请求成功
+                if (_listener != null) {
+                    _listener.onSuccessed(this);
                 }
             }
+        }
         } catch (Exception e) {
             Log.d("", e.getMessage());
 
@@ -308,7 +308,7 @@ public abstract class BaseRestApi {
         return false;
     }
 
-    private String simulateResponse() {
+    protected String simulateResponse() {
         return null;
     }
 

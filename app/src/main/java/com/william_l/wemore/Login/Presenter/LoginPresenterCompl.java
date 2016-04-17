@@ -1,8 +1,9 @@
 package com.william_l.wemore.Login.Presenter;
 
-import android.os.Handler;
-import android.os.Looper;
+import android.app.Activity;
 
+import com.william_l.wemore.Api.BaseRestApi;
+import com.william_l.wemore.Api.Constant.Perference;
 import com.william_l.wemore.Api.LoginRestApi;
 import com.william_l.wemore.Api.MyThreadPool;
 import com.william_l.wemore.Login.Model.IUser;
@@ -19,12 +20,10 @@ public class LoginPresenterCompl implements ILoginPresenter {
 
     IUser user;
     ILoginView iLoginView;
-    Handler handler;
 
     public LoginPresenterCompl(ILoginView iLoginView) {
         this.iLoginView = iLoginView;
         initUser();
-        handler = new Handler(Looper.getMainLooper());
 
     }
 
@@ -47,20 +46,47 @@ public class LoginPresenterCompl implements ILoginPresenter {
         cachedExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                LoginRestApi loginRA = new LoginRestApi("", "");
+                LoginRestApi loginRA = new LoginRestApi(String.format(Perference.WeatherUrl, Perference.WeatherAppid), "");
+                BaseRestApi.BaseRestApiListener baseRestApiListener = new BaseRestApi.BaseRestApiListener() {
+                    @Override
+                    public void onSuccessed(BaseRestApi object) {
+                        ((Activity)iLoginView).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                iLoginView.onLoginResult(true, code);
+                            }
+                        });
+                        System.out.println("right");
+                    }
+
+                    @Override
+                    public void onFailed(BaseRestApi object, String message) {
+
+                    }
+
+                    @Override
+                    public void onError(BaseRestApi object, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onTimeout(BaseRestApi object) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(BaseRestApi object) {
+
+                    }
+                };
+                loginRA.setListener(baseRestApiListener);
                 try {
-                    loginRA.call(false);
+                    loginRA.call(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                iLoginView.onLoginResult(result, code);
-//            }
-//        }, 3000);
     }
 
     @Override
