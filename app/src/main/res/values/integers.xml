@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="current_language">1</integer>
+    <integer name="activity_switch_duration">200</integer>
+    <integer name="continue_gift_show_duration">600</integer>
+    <integer name="gift_full_heart_anim_frame">50</integer>
+
+    <integer name="rotateAnimTime">175</integer>
+</resources>
