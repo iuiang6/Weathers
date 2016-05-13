@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.william_l.wemore"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.william_l.wemore">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -28,7 +28,8 @@
             android:label="@string/action_login" />
         <activity
             android:name=".Weather.WeathersActivity"
-            android:label="@string/action_weather"></activity>
+            android:label="@string/action_weather" />
+        <activity android:name=".Register.RegisterActivity" />
     </application>
 
 </manifest>

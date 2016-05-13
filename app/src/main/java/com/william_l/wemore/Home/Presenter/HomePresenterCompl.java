@@ -8,6 +8,7 @@ import android.os.Looper;
 import com.william_l.wemore.Home.Util.ActivityHolder;
 import com.william_l.wemore.Home.View.IHomeView;
 import com.william_l.wemore.Login.LoginActivity;
+import com.william_l.wemore.Register.RegisterActivity;
 import com.william_l.wemore.Weather.WeathersActivity;
 
 /**
@@ -21,6 +22,7 @@ public class HomePresenterCompl implements IHomePresenter {
         activityHolder = new ActivityHolder();
         activityHolder.addActivity("Login", LoginActivity.class);
         activityHolder.addActivity("Weather", WeathersActivity.class);
+        activityHolder.addActivity("Register", RegisterActivity.class);
 
     }
 
